@@ -8,17 +8,16 @@ import api from "api"
 export const MovieSearch = () => {
   const [movies, setMovies] = useState([])
 
-  useEffect(() => {
-    ; (async () => {
-      setMovies()
-      console.log(await api.index())
-    })()
-  })
+  const searchHandler = async (event) => {
+    // We only care about the 'results' property
+    const { results } = await api.index(event.target.elements[0].value)
+    setMovies(results)
+  }
 
   return (
     <main>
-      <Search />
-      <Cards />
+      <Search handler={searchHandler} />
+      <Cards movies={movies} />
     </main>
   )
 }
