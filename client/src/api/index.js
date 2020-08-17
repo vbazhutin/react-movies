@@ -2,15 +2,14 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-export default (
-  baseURL = "https://api.themoviedb.org/3/search/movie",
-  key = process.env.REACT_APP_API_KEY,
-) => ({
-  async index(query) {
-    const res = await fetch(
-      `${baseURL}?api_key=${key}&query=${query}&page=1&include_adult=false`
-    )
+// Exporting out a FUNCTION (not an Object!)
+export default (baseURL = `http://localhost:${process.env.REACT_APP_PORT}`) =>
+  // Invoking this function returns an object that ENCLOSES whatever 'baseURL' is
+  ({
+    // This is nothing but a method that is inside of the returned object 👆🏽
+    async index(query) {
+      const res = await fetch(`${baseURL}?query=${query}`)
 
-    return await res.json()
-  },
-})
+      return await res.json()
+    },
+  })

@@ -3,8 +3,10 @@ import React, { useState } from "react"
 import { Cards } from "./Cards"
 import { Form as Search } from "./Form"
 
+// Importing a function
 import api from "api"
 
+// Invoking the function returns an object with an 'index' method
 const moviesRepo = api()
 
 export const MovieSearch = () => {
